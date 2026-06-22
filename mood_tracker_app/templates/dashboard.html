@@ -1,0 +1,147 @@
+{% load dict_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SoulSpace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#F9F9FB] min-h-screen text-gray-700 antialiased">
+
+    {% include 'header.html' %}
+
+    <main class="max-w-6xl mx-auto p-8">
+
+        <!-- Hero -->
+<div class="mb-8 p-7 rounded-3xl shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+    style="background: linear-gradient(135deg, #e8f5f0 0%, #f0ede8 50%, #f5f0f8 100%);">
+    
+    <!-- Text -->
+    <div>
+        <span class="inline-flex items-center gap-1.5 text-xs font-medium text-purple-500 bg-white/70 px-3 py-1 rounded-full mb-3">
+            🌱 {{ today }}
+        </span>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Good evening, {{ username }} 🌸</h1>
+        <p class="text-gray-500 text-sm mt-1 max-w-sm">Take a slow breath. How are you arriving today? A small check-in keeps your inner garden flourishing.</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+        <a href="{% url 'check_in' %}" 
+           class="flex items-center justify-center gap-2 bg-[#9a89df] hover:bg-[#8571d7] text-white text-sm font-semibold px-5 py-3 rounded-xl transition shadow-sm whitespace-nowrap">
+            🖤 Log today's mood →
+        </a>
+
+        <button onclick="sendReminder()"
+            id="reminder-btn"
+            class="flex items-center justify-center gap-2 bg-white border border-[#9a89df] text-[#9a89df] hover:bg-purple-50 text-sm font-semibold px-5 py-3 rounded-xl transition whitespace-nowrap">
+            🔔 Remind me
+        </button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 right-6 bg-[#9a89df] text-white px-5 py-3 rounded-xl shadow-lg text-sm font-medium hidden transition z-50">
+    ✅ Reminder sent to your email!
+</div>
+
+<script>
+function sendReminder() {
+    const btn = document.getElementById('reminder-btn');
+    btn.disabled = true;
+    btn.innerText = '⏳ Sending...';
+
+    fetch('/api/send-reminder/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
+        btn.disabled = false;
+        btn.innerText = '🔔 Remind me';
+    })
+    .catch(() => {
+        btn.disabled = false;
+        btn.innerText = '🔔 Remind me';
+    });
+}
+</script>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <p class="text-gray-400 text-sm">Total logs</p>
+                <h2 class="text-2xl font-bold text-gray-800">{{ total_logs }}</h2>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <p class="text-gray-400 text-sm">Avg mood score</p>
+                <h2 class="text-2xl font-bold text-gray-800">{{ avg_mood }}</h2>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <p class="text-gray-400 text-sm">Current streak</p>
+                <h2 class="text-2xl font-bold text-gray-800">{{ current_streak }}d</h2>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <p class="text-gray-400 text-sm">Most felt</p>
+                <h2 class="text-2xl font-bold text-gray-800">{{ most_felt }}</h2>
+            </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-xl text-gray-800">{{ current_month }} {{ current_year }}</h3>
+            </div>
+
+            <!-- Day labels -->
+            <div class="grid grid-cols-7 gap-2 text-center text-xs text-gray-400 mb-2">
+                <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+            </div>
+
+            <!-- Days grid -->
+            <div class="grid grid-cols-7 gap-2">
+                {% for day in days %}
+                    {% if day != 0 %}
+                        <div class="h-16 border border-gray-100 rounded-xl p-2 flex flex-col items-center justify-between hover:border-purple-200 transition">
+                            <span class="text-sm font-bold text-gray-700">{{ day }}</span>
+                            {% with color=mood_map|get_item:day %}
+                                {% if color %}
+                                    <div class="w-3 h-3 rounded-full {{ color }}"></div>
+                                {% else %}
+                                    <div class="w-3 h-3"></div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    {% else %}
+                        <div class="h-16 bg-gray-50/50 rounded-xl"></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <!-- Legend -->
+            <div class="flex flex-wrap gap-3 mt-6 pt-4 border-t border-gray-50 text-xs text-gray-500">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span>Amazing</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-yellow-400"></span>Happy</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-teal-400"></span>Relaxed</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-400"></span>Okay</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-300"></span>Tired</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-600"></span>Sad</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-pink-400"></span>Anxious</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span>Angry</span>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

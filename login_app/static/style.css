@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+.box {
+    padding: 30px;
+    width: 40%;
+    min-width: 320px;
+    margin: 50px auto;
+}
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+}
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 20px;
+}
+label {
+    width: 100px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.input-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column; 
+}
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid black;
+}
+.error {
+    color: #dc3545;
+    font-size: 13px;
+    margin: 5px 0 0 0;
+    font-weight: 500;
+}
+
+button {
+    border: 2px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 3px 3px 0px black;
+}
+
+/* Success page style */
+.success_content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 30px auto;
+}
+.nav {
+    text-align: right;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
+
+.nav a {
+    text-decoration: none;
+    border-bottom: 1px solid blue;
+    font-size: 1.3rem;
+}
+.success_mess h1 {
+    font-size: 1.9rem;
+}
+.success_mess p {
+    margin-top: 10px;
+    font-size: 1.4rem;
+}
+.success-msg {
+    color: #28a745;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}

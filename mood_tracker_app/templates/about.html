@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#F9F9FB] min-h-screen text-gray-700 antialiased">
+
+    {% include 'header.html' %}
+
+    <div class="max-w-6xl mx-auto px-6 py-10 space-y-12">
+
+        <!-- (The Pastel Gradient Banner) -->
+        <div class="relative bg-gradient-to-tr from-[#EBE6FF] via-[#FFF5FA] to-[#FFFBEB] rounded-[2.5rem] p-12 text-center overflow-hidden border border-gray shadow-md flex flex-col items-center justify-center min-h-[360px]">
+            <div class="inline-block bg-white/60 backdrop-blur-sm text-[#7C65E5] border border-[#E8E4F9] text-[11px] font-semibold px-3 py-1 rounded-full mb-6 shadow-sm">
+                ✨ Our mission
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight max-w-2xl mb-4">
+                A gentler relationship <br> with your <span class="text-[#EF6B6B]">feelings.</span>
+            </h1>
+            <p class="text-gray-500 text-sm max-w-2xl leading-relaxed mb-8">
+                SoulSpace exists to make mental well-being feel less like work and more like tending a garden. We believe noticing how you feel is the first, smallest, and most powerful act of self-care — and it should never feel like a chore.
+            </p>
+            <div class="flex space-x-4 font-semibold text-sm">
+                <a href="{% url 'check_in' %}" class="bg-[#9A85F1] hover:bg-[#856DE3] text-white px-6 py-3 rounded-full shadow-md shadow-purple-200 transition-all flex items-center space-x-2">
+                    <span>🖤</span> <span>Try a check-in</span> <span class="text-xs">→</span>
+                </a>
+                <a href="{% url 'dashboard' %}" class="bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 px-6 py-3 rounded-full transition-all">
+                    See the dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- Feature Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm space-y-3">
+                <div class="w-10 h-10 bg-red-50 text-red-400 rounded-2xl flex items-center justify-center text-lg">❤️</div>
+                <h3 class="font-bold text-gray-800">Daily check-ins</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">A moment of self-awareness, every day. No streaks-shame, no pressure.</p>
+            </div>
+            <!-- Card 2-->
+            <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm space-y-3">
+                <div class="w-10 h-10 bg-purple-50 text-purple-400 rounded-2xl flex items-center justify-center text-lg">📊</div>
+                <h3 class="font-bold text-gray-800">Patterns you can see</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Watch your week unfold in colorful dots and gentle charts.</p>
+            </div>
+            <!-- Card 3-->
+            <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm space-y-3">
+                <div class="w-10 h-10 bg-green-50 text-green-400 rounded-2xl flex items-center justify-center text-lg">🌱</div>
+                <h3 class="font-bold text-gray-800">Mindful prompts</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Tiny invitations to pause and notice what your body is telling you.</p>
+            </div>
+            <!--Card 4-->
+            <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm space-y-3">
+                <div class="w-10 h-10 bg-blue-50 text-blue-400 rounded-2xl flex items-center justify-center text-lg">🛡️</div>
+                <h3 class="font-bold text-gray-800">Privacy-first</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Your feelings stay yours. Encrypted, never sold, always under your control.</p>
+            </div>
+        </div>
+
+        <!-- Three Quiet Promises -->
+        <div class="bg-white rounded-[2.5rem] p-12 border border-gray-100 shadow-sm text-center space-y-10">
+            <div>
+                <span class="text-[#7C65E5] text-xs font-bold uppercase tracking-wider block mb-2">What we believe</span>
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Three quiet promises.</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <!-- 1  Promise -->
+                <div class="space-y-2">
+                    <span class="text-4xl font-black text-purple-200 block">01</span>
+                    <h4 class="font-bold text-gray-800 text-base">Compassion over metrics</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">We don't score your worth — we just listen.</p>
+                </div>
+                <!-- 2  Promise -->
+                <div class="space-y-2">
+                    <span class="text-4xl font-black text-orange-200 block">02</span>
+                    <h4 class="font-bold text-gray-800 text-base">Small steps, big shifts</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">A 30-second log can rewire your awareness over time.</p>
+                </div>
+                <!-- 3  Promise -->
+                <div class="space-y-2">
+                    <span class="text-4xl font-black text-teal-200 block">03</span>
+                    <h4 class="font-bold text-gray-800 text-base">You are not alone</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">Built with therapists, students, and people who needed it most.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Counter -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <span class="block text-xl font-bold text-purple-400">12k+</span>
+                <span class="text-gray-400 text-[10px]">Daily check-ins</span>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <span class="block text-xl font-bold text-orange-400">94%</span>
+                <span class="text-gray-400 text-[10px]">Feel more aware</span>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <span class="block text-xl font-bold text-green-400">4.8★</span>
+                <span class="text-gray-400 text-[10px]">App store rating</span>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <span class="block text-xl font-bold text-blue-400">100%</span>
+                <span class="text-gray-400 text-[10px]">Private & secure</span>
+            </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="bg-[#F2EFFF]/50 border border-[#EBE6FF] rounded-3xl p-8 text-center max-w-3xl mx-auto">
+            <span class="text-4xl text-[#9A85F1] font-serif block leading-none mb-2">“</span>
+            <p class="text-gray-600 italic text-base font-medium">
+                Almost everything will work again if you unplug it for a few minutes, including you.
+            </p>
+            <p class="text-xs text-gray-400 mt-4">Anne Lamott</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

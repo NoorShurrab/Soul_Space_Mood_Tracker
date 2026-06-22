@@ -1,0 +1,77 @@
+<nav class="sticky top-0 z-50 border-b border-purple-200 px-8 py-4 flex items-center justify-between"
+    style="background-color: #ede9fb;">
+    
+    <!-- Logo -->
+    <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-[#9A85F1] rounded-2xl flex items-center justify-center text-white text-xl shadow-md shadow-purple-200">🤍</div>
+        <div class="hidden sm:block">
+            <span class="font-bold text-gray-800 text-lg tracking-tight block leading-none">SoulSpace</span>
+            <span class="text-[10px] text-gray-400">A gentle place to feel</span>
+        </div>
+    </div>
+    
+    <!-- Nav links -->
+    <div class="hidden md:flex bg-white/40 backdrop-blur-sm p-1.5 rounded-full text-sm font-medium text-gray-600 border border-white/50 gap-1">
+        <a href="{% url 'dashboard' %}" class="px-5 py-2 rounded-full flex items-center gap-1.5 transition-all 
+            {% if request.resolver_match.url_name == 'dashboard' %}bg-white text-gray-900 shadow-sm font-semibold{% else %}hover:bg-white/70 text-gray-600{% endif %}">
+            <span>📊</span> Dashboard
+        </a>
+        <a href="{% url 'check_in' %}" class="px-5 py-2 rounded-full flex items-center gap-1.5 transition-all 
+            {% if request.resolver_match.url_name == 'check_in' %}bg-white text-gray-900 shadow-sm font-semibold{% else %}hover:bg-white/70 text-gray-600{% endif %}">
+            <span>🤍</span> Check-in
+        </a>
+        <a href="{% url 'history' %}" class="px-5 py-2 rounded-full flex items-center gap-1.5 transition-all 
+            {% if request.resolver_match.url_name == 'history' %}bg-white text-gray-900 shadow-sm font-semibold{% else %}hover:bg-white/70 text-gray-600{% endif %}">
+            <span>📖</span> History
+        </a>
+        <a href="{% url 'about_us' %}" class="px-5 py-2 rounded-full flex items-center gap-1.5 transition-all 
+            {% if request.resolver_match.url_name == 'about_us' %}bg-white text-gray-900 shadow-sm font-semibold{% else %}hover:bg-white/70 text-gray-600{% endif %}">
+            <span>ℹ️</span> About
+        </a>
+    </div>
+
+    <!-- User + Sign out -->
+    <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 bg-white/50 backdrop-blur-sm px-3 py-2 rounded-full border border-white/60 shadow-sm">
+            <div class="w-7 h-7 bg-[#9A85F1] text-white rounded-full flex items-center justify-center font-bold text-xs shadow">{{ initials }}</div>
+            <span class="hidden sm:block text-sm font-medium text-gray-700">{{ username }}</span>
+        </div>
+        <a href="{% url 'logout' %}" 
+           class="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-600 text-sm font-semibold px-4 py-2 rounded-full border border-red-100 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"/>
+            </svg>
+            <span class="hidden sm:block">Sign out</span>
+        </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button onclick="toggleMenu()" class="md:hidden text-gray-500 hover:text-gray-700 ml-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="hidden md:hidden border-b border-purple-100 px-6 py-4 space-y-2"
+     style="background: linear-gradient(135deg, #d8d0f7 0%, #e8e0fb 100%);">
+    <a href="{% url 'dashboard' %}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium {% if request.resolver_match.url_name == 'dashboard' %}bg-white text-purple-600 shadow-sm{% else %}text-gray-600 hover:bg-white/60{% endif %}">
+        📊 Dashboard
+    </a>
+    <a href="{% url 'check_in' %}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium {% if request.resolver_match.url_name == 'check_in' %}bg-white text-purple-600 shadow-sm{% else %}text-gray-600 hover:bg-white/60{% endif %}">
+        🤍 Check-in
+    </a>
+    <a href="{% url 'history' %}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium {% if request.resolver_match.url_name == 'history' %}bg-white text-purple-600 shadow-sm{% else %}text-gray-600 hover:bg-white/60{% endif %}">
+        📖 History
+    </a>
+    <a href="{% url 'about_us' %}" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium {% if request.resolver_match.url_name == 'about_us' %}bg-white text-purple-600 shadow-sm{% else %}text-gray-600 hover:bg-white/60{% endif %}">
+        ℹ️ About
+    </a>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+</script>

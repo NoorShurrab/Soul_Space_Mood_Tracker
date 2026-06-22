@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SoulSpace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-tr from-[#d8f1e6]/50 to-[#e9e2fb]/60 min-h-screen flex items-center justify-center p-4 font-sans antialiased text-gray-800">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- بقعة أخضر باستيل -->
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#d8f1e6] blur-[120px] opacity-70"></div>
+        <!-- بقعة أزرق سماوي -->
+        <div class="absolute top-[5%] right-[-5%] w-[45vw] h-[45vw] rounded-full bg-[#e1f0fa] blur-[100px] opacity-60"></div>
+        <!-- بقعة بنفسجي ناعم -->
+        <div class="absolute top-[40%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-[#e9e2fb] blur-[140px] opacity-60"></div>
+        <!-- bقعة زهري باستيل -->
+        <div class="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-[#fbe2f3] blur-[130px] opacity-75"></div>
+    </div>
+    <div class="w-full max-w-md flex flex-col items-center z-10">
+        
+<div class="w-12 h-12 bg-[#4fd1c5] text-white rounded-2xl flex items-center justify-center text-xl mb-4 shadow-lg shadow-[#4fd1c5]/30">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+</div>
+        
+        <h2 class="text-3xl font-bold text-gray-900 tracking-tight text-center">Begin your space</h2>
+        <p class="text-sm text-gray-500 mt-1 mb-6 text-center">Create an account and start tracking how you feel.</p>
+
+        <div class="w-full bg-white/80 backdrop-blur-md rounded-[24px] p-8 shadow-sm border border-white/70">
+            <form action="/register" method="POST" class="space-y-4">
+                {% csrf_token %}
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold text-gray-500 mb-1.5 pl-0.5">First name</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-regular fa-user absolute left-4 text-gray-400 text-sm"></i>
+                            <input type="text" name="first_name" placeholder="Noor" 
+                                class="w-full pl-11 pr-4 py-3 bg-[#f7fafc] border border-gray-100 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#bbeeec] focus:bg-white focus:ring-4 focus:ring-[#4fd1c5]/10 transition-all">
+                        </div>
+                        {% if messages %}
+                            {% for msg in messages %}
+                                {% if 'first_name' in msg.tags %}<p class="text-red-500 text-[11px] mt-1 font-medium pl-0.5">{{ msg }}</p>{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold text-gray-500 mb-1.5 pl-0.5">Last name</label>
+                        <div class="relative flex items-center">
+                            <i class="fa-regular fa-user absolute left-4 text-gray-400 text-sm"></i>
+                            <input type="text" name="last_name" placeholder="Shurrab" 
+                                class="w-full pl-11 pr-4 py-3 bg-[#f7fafc] border border-gray-100 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#bbeeec] focus:bg-white focus:ring-4 focus:ring-[#4fd1c5]/10 transition-all">
+                        </div>
+                        {% if messages %}
+                            {% for msg in messages %}
+                                {% if 'last_name' in msg.tags %}<p class="text-red-500 text-[11px] mt-1 font-medium pl-0.5">{{ msg }}</p>{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1.5 pl-0.5">Email</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-regular fa-envelope absolute left-4 text-gray-400 text-sm"></i>
+                        <input type="text" name="email" placeholder="you@soulspace.io" 
+                            class="w-full pl-11 pr-4 py-3 bg-[#f7fafc] border border-gray-100 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#bbeeec] focus:bg-white focus:ring-4 focus:ring-[#4fd1c5]/10 transition-all">
+                    </div>
+                    {% if messages %}
+                        {% for msg in messages %}
+                            {% if 'email' in msg.tags %}<p class="text-red-500 text-[11px] mt-1 font-medium pl-0.5">{{ msg }}</p>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1.5 pl-0.5">Birthday</label>
+                    <input type="date" name="birthday" 
+                            class="w-full pl-4 pr-4 py-3 bg-[#f7fafc] border border-gray-100 rounded-xl text-sm text-gray-700 focus:outline-none focus:border-[#bbeeec] focus:bg-white focus:ring-4 focus:ring-[#4fd1c5]/10 transition-all">
+                    {% if messages %}
+                        {% for msg in messages %}
+                            {% if 'birthday' in msg.tags %}<p class="text-red-500 text-[11px] mt-1 font-medium pl-0.5">{{ msg }}</p>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1.5 pl-0.5">Password</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-solid fa-lock absolute left-4 text-gray-400 text-sm"></i>
+                        <input type="password" name="password" placeholder="At least 8 characters" 
+                            class="w-full pl-11 pr-4 py-3 bg-[#f7fafc] border border-gray-100 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#bbeeec] focus:bg-white focus:ring-4 focus:ring-[#4fd1c5]/10 transition-all">
+                    </div>
+                    {% if messages %}
+                        {% for msg in messages %}
+                            {% if 'password' in msg.tags %}<p class="text-red-500 text-[11px] mt-1 font-medium pl-0.5">{{ msg }}</p>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1.5 pl-0.5">Confirm password</label>
+                    <div class="relative flex items-center">
+                        <i class="fa-solid fa-lock absolute left-4 text-gray-400 text-sm"></i>
+                        <input type="password" name="confirm_pw" placeholder="Repeat your password" 
+                            class="w-full pl-11 pr-4 py-3 bg-[#f7fafc] border border-gray-100 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#bbeeec] focus:bg-white focus:ring-4 focus:ring-[#4fd1c5]/10 transition-all">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" 
+                            class="w-full py-3.5 bg-[#9a89df] hover:bg-[#9f8ee0] text-white font-semibold rounded-xl text-sm flex items-center justify-center gap-2 shadow-md shadow-[#b2a4e8]/25 transition-all transform active:scale-[0.99]">
+                        <i class="fa-solid fa-user-plus"></i> Create account
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <p class="text-xs text-gray-500 mt-6">
+            Already have an account? <a href="/login" class="text-[#6366f1] font-semibold hover:underline">Sign in</a>
+        </p>
+    </div>
+
+</body>
+</html>
