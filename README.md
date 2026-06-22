@@ -1,4 +1,4 @@
-# SoulSpace — A Gentle Place to Feel
+# SoulSpace 
 
 A mood tracking web application with micro-journaling and personal analytics. SoulSpace helps users build a gentler relationship with their feelings through daily check-ins, mood history, and personalized email reminders.
 
