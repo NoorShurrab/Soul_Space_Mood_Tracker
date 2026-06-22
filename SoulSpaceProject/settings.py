@@ -124,10 +124,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# 1. تغيير الـ Backend ليصبح حقيقياً يرسل عبر شبكة الويب
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# 2. إعدادات خادم الـ Gmail SMTP
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

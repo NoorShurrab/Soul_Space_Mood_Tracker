@@ -31,10 +31,9 @@ def send_reminder_api(request):
     
     user = User.objects.get(id=request.session['user_id'])
     
-    # آخر log
+
     last_log = MoodLog.objects.filter(user=user).order_by('-created_at').first()
     
-    # جمل تحفيزية حسب المود
     mood_messages = {
         'Amazing': "You're on top of the world! 🌟 Keep riding that beautiful energy — you deserve every bit of it.",
         'Happy': "Your happiness is contagious! 😊 Cherish this feeling and share it with someone you love today.",

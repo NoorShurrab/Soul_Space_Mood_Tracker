@@ -12,10 +12,6 @@ from django.core.cache import cache
 from django.conf import settings
 import bcrypt
 
-# ============================================================
-# Forgot Password — يبحث في Custom User model وليس auth.User
-# ============================================================
-
 def forgot_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -24,7 +20,6 @@ def forgot_password(request):
         if user_list.exists():
             user = user_list[0]
             
-            # ولّدي token عشوائي واحفظيه في cache لمدة 30 دقيقة
             token = secrets.token_urlsafe(32)
             cache.set(f"reset_{token}", user.id, timeout=1800)
             
@@ -43,7 +38,6 @@ def forgot_password(request):
 
 
 def reset_password_confirm(request, token):
-    # اجيبي الـ user id من الـ cache
     user_id = cache.get(f"reset_{token}")
     
     if not user_id:
@@ -67,17 +61,12 @@ def reset_password_confirm(request, token):
         user.password = make_password(password, hasher='bcrypt')
         user.save()
         
-        # احذفي الـ token بعد الاستخدام
         cache.delete(f"reset_{token}")
         
         return redirect('/reset/done/')
 
     return render(request, 'registration/password_reset_confirm.html', {'validlink': True})
 
-
-# ============================================================
-# باقي الـ views — بدون تغيير
-# ============================================================
 def index(request):
     return render(request, 'index.html')
 

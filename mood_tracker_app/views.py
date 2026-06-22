@@ -71,7 +71,6 @@ def check_in_view(request):
         from login_app.models import User
         user = User.objects.get(id=request.session['user_id'])
         
-        # حساب الـ mood_score
         MOOD_SCORE = {
             'Amazing': 5, 'Happy': 4, 'Relaxed': 3,
             'Okay': 3, 'Tired': 2, 'Sad': 2,
@@ -85,7 +84,6 @@ def check_in_view(request):
             note=note,
         )
         
-        # حفظ الـ tags
         if tags_input:
             tag_names = [t.strip() for t in tags_input.split(',') if t.strip()]
             for tag_name in tag_names:
@@ -103,12 +101,11 @@ def history_view(request):
     user = User.objects.get(id=request.session['user_id'])
     logs = MoodLog.objects.filter(user=user).order_by('-created_at')
     
-    # فلتر بالـ mood
+    
     mood_filter = request.GET.get('mood', '')
     if mood_filter:
         logs = logs.filter(mood=mood_filter)
     
-    # بحث في الـ notes
     search = request.GET.get('search', '')
     if search:
         logs = logs.filter(note__icontains=search)
@@ -119,7 +116,7 @@ def history_view(request):
     avg_mood_rounded = round(avg_mood, 1) if avg_mood else 0.0
     logs_with_notes = all_logs.filter(note__isnull=False).exclude(note='').count()
     
-    # Tags لكل log
+    
     logs_with_tags = []
     for log in logs:
         tags = MoodLogTag.objects.filter(mood_log=log).select_related('tag')
