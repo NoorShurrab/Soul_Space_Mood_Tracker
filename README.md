@@ -104,5 +104,28 @@ A mood tracking web application with micro-journaling and personal analytics. So
 | Password Reset | `/password_reset/` |
 
 ---
+## Output 
+![Register page](./login_app/static/images/Register.png)
 
-*Built with 💜 — SoulSpace, a gentle place to feel.*
+<br>
+
+![Login page](./login_app/static/images/Login.png)
+
+<br>
+
+![Dashboard page](./login_app/static/images/Dashboard.png)
+
+<br>
+
+![Check-in page](./login_app/static/images/Check-in.png)
+
+<br>
+
+![History page](./login_app/static/images/History.png)
+
+<br>
+
+![About page](./login_app/static/images/About.png)
+
+
+*Built with 💜 SoulSpace, a gentle place to feel.*
