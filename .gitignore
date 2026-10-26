@@ -1,3 +1,10 @@
 db.sqlite3
 soulspace_db
 *.sqlite3
+
+# Environment variables
+.env
+
+
+__pycache__/
+*.pyc
